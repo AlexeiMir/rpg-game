@@ -80,6 +80,9 @@ function getCycle() {
 }
 
 function walk(timestamp) {
+  // timestamp - времы прошедшее с начала загрузки страницы.
+  // Опираясь на timestamp можно совершать анимацию
+  // в определенный момент
   // console.log('###: timestamp',timestamp)
   if (keyPressed === 'down' && pY <= heightCanvas - spriteH) {
     pY += 10;
@@ -104,6 +107,7 @@ function walk(timestamp) {
   ctx.clearRect(0, 0, 600, 600);
   ctx.drawImage(img, spriteW * cycle, atlasRow, spriteW, spriteH, pX, pY, 48, 48);
 
+  // создаем рекурсию
   window.requestAnimationFrame(walk);
 }
 

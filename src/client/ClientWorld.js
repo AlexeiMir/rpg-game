@@ -16,6 +16,7 @@ class ClientWorld {
     map.forEach((cfgRow, y) => {
       cfgRow.forEach((cfgCell, x) => {
         this.engine.renderSpriteFrame({
+          // cfgCell = ["wall"]
           sprite: ['terrain', cfgCell[0]],
           frame: 0,
           x,

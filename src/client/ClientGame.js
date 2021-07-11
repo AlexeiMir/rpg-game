@@ -6,6 +6,7 @@ import levelCfg from '../configs/world.json';
 
 class ClientGame {
   constructor(cfg) {
+    // дополняем полями
     Object.assign(this, { cfg });
 
     this.engine = this.createEngine();
@@ -23,7 +24,9 @@ class ClientGame {
   }
 
   initEngine() {
+    // когда все картинки загрузились, тогда стартуем engine
     this.engine.loadSprites(sprites).then(() => {
+      // on(event, callback).callback вызывается как только отрабатывает loop(timestamp)
       this.engine.on('render', (_, time) => {
         this.map.init();
         // console.log('###: render',time)
@@ -32,7 +35,9 @@ class ClientGame {
     });
   }
 
+  // инициализация игры
   static init(cfg) {
+    // предотвращение повторной инициализации
     if (!ClientGame.game) {
       ClientGame.game = new ClientGame(cfg);
     }
