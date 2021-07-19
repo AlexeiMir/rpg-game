@@ -111,59 +111,6 @@ function walk(timestamp) {
   window.requestAnimationFrame(walk);
 }
 
-img.addEventListener('load', () => {
-  window.requestAnimationFrame(walk);
-});
-
-/* img.addEventListener('load', () => {
-  setTimeout(() => {
-    loading.style.transition = 'all 0.1s ease';
-    loading.style.visibility = 'hidden';
-    loading.style.opacity = 'none';
-  }, 50);
-
-  function getCycle() {
-    return (cycle + 1) % shots;
-  }
-
-  setInterval(() => {
-    if (bottomPressed && pY <= heightCanvas - spriteH) {
-      pY += 10;
-      cycle = getCycle();
-      col = 0;
-    }
-    if (upPressed && pY >= 0) {
-      pY -= 10;
-      cycle = getCycle();
-      col = spriteH * 3;
-    }
-    if (rightPressed && pX <= widthCanvas - spriteW) {
-      pX += 10;
-      cycle = getCycle();
-      col = spriteH * 2;
-    }
-    if (leftPressed && pX > 0) {
-      pX -= 10;
-      cycle = getCycle();
-      col = spriteH;
-    }
-    ctx.clearRect(0, 0, 600, 600);
-    ctx.drawImage(img, spriteW * cycle, col, spriteW, spriteH, pX, pY, 48, 48);
-
-  }, 120);
-}); */
-
-// terrian.addEventListener('load', () => {
-//     const {map} = worldCfg
-//     map.forEach((cfgRow, y) => {
-//         cfgRow.forEach((cfgCell, x) => {
-//             const [sX,sY,sW,sH] = sprites.terrain[cfgCell[0]].frames[0]
-//             ctx.drawImage(terrian,sX,sY,sW,sH,spriteW*x,spriteH*y,spriteW,spriteH)
-//         })
-//     })
-// })
-// const loading = document.getElementById('loading');
-// let bottomPressed = false;
-// let upPressed = false;
-// let rightPressed = false;
-// let leftPressed = false;
+// img.addEventListener('load', () => {
+//  window.requestAnimationFrame(walk);
+// });
