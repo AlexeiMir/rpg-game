@@ -21,6 +21,7 @@ class PositionedObject {
    * @param {int} offset_percent_y Сдвиг относительно верхнего левого угла в процентах от размера объекта
    */
   worldPosition(offset_percent_x = 0, offset_percent_y = 0) {
+    // console.log('worldPosition', this.width);
     return {
       x: this.x + (this.width * offset_percent_x) / 100,
       y: this.y + (this.height * offset_percent_y) / 100,
