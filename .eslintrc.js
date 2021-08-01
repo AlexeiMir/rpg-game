@@ -16,6 +16,7 @@ module.exports = {
     "no-unused-vars": "off",
     "no-console": "off",
     "no-param-reassign": 0,
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-return-assign": ["error", "always"]
   },
 };

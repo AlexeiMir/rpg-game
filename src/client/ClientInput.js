@@ -26,7 +26,7 @@ class ClientInput {
   }
 
   onKey({ ...handlers }) {
-    console.log('### handlers', handlers);
+    // console.log('### handlers', handlers);
     this.keyHandlers = { ...this.keyHandlers, ...handlers };
   }
 }
