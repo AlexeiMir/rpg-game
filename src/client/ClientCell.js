@@ -1,5 +1,6 @@
 import PositionedObject from '../common/PositionedObject';
 import ClientGameObject from './ClientGameObject';
+import ClientPlayer from './ClientPlayer';
 
 // класс, отвечающий за работу отдельной ячейки карты. Все игровые объекты (objects) должны быть привязаны
 // к какой-то ячейке, чтобы быть отрендеренными
@@ -18,6 +19,9 @@ class ClientCell extends PositionedObject {
         y: cellWidth * cfg.cellRow,
         width: cellWidth,
         height: cellHeight,
+        col: cfg.cellCol,
+        row: cfg.cellRow,
+        objectClasses: { player: ClientPlayer },
       },
       cfg,
     );
@@ -26,10 +30,25 @@ class ClientCell extends PositionedObject {
   }
 
   initGameObjects() {
-    const { cellCfg } = this; // ['wall']
+    const { cellCfg, objectClasses } = this; // ['wall']
 
     this.objects = cellCfg.map((layer, layerId) =>
-      layer.map((objCfg) => new ClientGameObject({ cell: this, objCfg, layerId })),
+      // при инициализации нашего игрового объекта будем использовать нужный нам класс для создания нужного нам
+      // игрового объекта
+      layer.map((objCfg) => {
+        let ObjectClass;
+
+        if (objCfg.class) {
+          ObjectClass = objectClasses[objCfg.class];
+        } else {
+          ObjectClass = ClientGameObject;
+        }
+        return new ObjectClass({
+          cell: this,
+          objCfg,
+          layerId,
+        });
+      }),
     );
     // console.log('ClientCell objects', this.objects);
   }
