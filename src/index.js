@@ -4,6 +4,24 @@ import terrianAtlas from './assets/terrain.png';
 import ClientGame from './client/ClientGame';
 
 const canvas = document.getElementById('game');
+const form = document.getElementById('nameForm');
+const name = document.getElementById('name');
+const startGame = document.querySelector('.start-game');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const player = name.value;
+  if (player === '') return false;
+  startGame.classList.add('hidden');
+  ClientGame.init({ tagId: 'game', playerName: player });
+  return '';
+});
+
+// window.addEventListener('load', () => {
+//   console.log('init');
+//   ClientGame.init({ tagId: 'game', playerName:player });
+// });
+
 const { width: widthCanvas, height: heightCanvas } = canvas.getBoundingClientRect();
 const ctx = canvas.getContext('2d');
 
@@ -16,10 +34,6 @@ let pX = (widthCanvas - spriteW) / 2;
 let keyPressed = null;
 const atlasRows = { down: 0, left: 1, right: 2, up: 3 };
 let atlasRow = 0;
-
-window.addEventListener('load', () => {
-  ClientGame.init({ tagId: 'game' });
-});
 
 const terrian = document.createElement('img');
 terrian.src = terrianAtlas;
