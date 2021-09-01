@@ -29,27 +29,38 @@ class ClientCell extends PositionedObject {
     this.initGameObjects();
   }
 
+  createGameObject(objCfg, layerId) {
+    const { objectClasses } = this;
+
+    let ObjectClass;
+
+    if (objCfg.class) {
+      ObjectClass = objectClasses[objCfg.class];
+    } else {
+      ObjectClass = ClientGameObject;
+    }
+
+    const obj = new ObjectClass({
+      cell: this,
+      objCfg,
+      layerId,
+    });
+
+    // точка, где будут появляться наши герои
+    if (obj.type === 'spawn') {
+      this.world.game.addSpawnPoint(obj);
+    }
+
+    return obj;
+  }
+
   initGameObjects() {
-    const { cellCfg, objectClasses } = this; // ['wall']
+    const { cellCfg } = this;
 
     this.objects = cellCfg.map((layer, layerId) =>
       // при инициализации нашего игрового объекта будем использовать нужный нам класс для создания нужного нам
       // игрового объекта
-      layer.map((objCfg) => {
-        let ObjectClass;
-
-        if (objCfg.class) {
-          ObjectClass = objectClasses[objCfg.class];
-        } else {
-          ObjectClass = ClientGameObject;
-        }
-        return new ObjectClass({
-          cell: this,
-          objCfg,
-          layerId,
-          playerName: this.world.game.cfg?.playerName,
-        });
-      }),
+      layer.map((objCfg) => this.createGameObject(objCfg, layerId)),
     );
     // console.log('ClientCell objects', this.objects);
   }
@@ -73,11 +84,13 @@ class ClientCell extends PositionedObject {
     }
 
     objects[objToAdd.layerId].push(objToAdd);
+    console.log('objects[objToAdd.layerId]', objects);
   }
 
   removeGameObject(objToRemove) {
     const { objects } = this;
     objects.forEach((layer, layerId) => objects[layerId].filter((obj) => obj !== objToRemove));
+    console.log('### objects after del', objects);
   }
 
   findObjectsByType(type) {

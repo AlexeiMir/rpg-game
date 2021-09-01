@@ -18,6 +18,7 @@ module.exports = {
     "no-param-reassign": 0,
     "import/prefer-default-export": "off",
     "no-return-assign": ["error", "always"],
-    "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }]
+    "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
+    "class-methods-use-this":"off"
   },
 };
